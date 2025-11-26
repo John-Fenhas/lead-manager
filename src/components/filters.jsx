@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import AddLeadBtn from "./tittle";
+
 
 export default function Filters() {
 
@@ -40,6 +42,67 @@ export default function Filters() {
     }, []);
 
   return (
+
+    <>
+        <section className="w-full flex justify-between ">
+      <div className="flex items-center">
+        <p className="text-sm font-semibold">
+          Leads Dashboard 
+        </p>
+      </div>
+    
+      <div className="flex gap-2 h-8">
+        <div className="
+        flex
+        flex-row 
+        justify-center 
+        items-center 
+        h-full 
+        min-w-48
+        bg-[#ebebeb] 
+        px-2 
+        rounded-md 
+        focus-within:border 
+        focus-within:border-gray-400
+        focus-within:shadow-[0_0_8px_rgba(75,85,99,0.65)]
+        ">
+
+          <svg fill="#6B7280" width="12px" height="12px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" stroke="#6B7280"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fillRule="evenodd"></path> </g></svg>
+
+          <input 
+          id="search"
+          type="text"
+          placeholder="Search Leads..."
+          className="
+          bg-[#ebebeb] 
+          min-w-8
+          pl-3
+          text-xs
+          placeholder-gray-500
+          bg-blend-difference
+          focus:outline-none
+          focus:ring-0
+          "
+          />  
+
+        </div>
+
+        <div className="h-auto w-auto">
+          
+          <AddLeadBtn />
+
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+    </section>
+
     <section className="mt-6 bg-white rounded-md w-full border border-gray-200 
     
     ">
@@ -73,8 +136,8 @@ export default function Filters() {
             <ul
               id="dropdownMenu"
               className="absolute left-0 top-full w-32 bg-white border rounded-md shadow-md 
-                    opacity-0 scale-95 transform transition-all duration-200 ease-out 
-                    origin-top pointer-events-none z-10">
+              opacity-0 scale-95 transform transition-all duration-200 ease-out 
+              origin-top pointer-events-none z-10">
               <li><a href="#" className="block px-4 py-2 hover:bg-gray-100">Item 1</a></li>
               <li><a href="#" className="block px-4 py-2 hover:bg-gray-100">Item 2</a></li>
               <li><a href="#" className="block px-4 py-2 hover:bg-gray-100">Item 3</a></li>
@@ -89,6 +152,7 @@ export default function Filters() {
       </div>
 
     </section>
+                      </>
   )
 
 }

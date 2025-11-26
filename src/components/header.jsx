@@ -3,18 +3,7 @@ import { useEffect } from "react"
 
 export default function Header() {
 
-  // async function testFetch() {
-  // const { data, error } = await supabase
-  //   .from("your_table_name")
-  //   .select("*")
 
-  //   console.log("data:", data)
-  //   console.log("error:", error)
-  // }
-
-  // useEffect(() => {
-  //   testFetch()
-  // }, [])
 
   
   return (
