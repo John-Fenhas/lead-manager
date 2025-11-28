@@ -1,50 +1,68 @@
 import { useEffect } from "react";
-import AddLeadBtn from "./tittle";
+import Modal from "./modal";
 
 
-export default function Filters() {
 
+    ////// modal call btnnn
+
+      <button id="add-lead-btn" className="bg-black text-sm text-gray-50 w-24 rounded-md h-full cursor-pointer  
+      
+      add-lead-btn 
+      
+      ">
+      +  Add Lead 
+      </button>
+    
+    ///////
+
+
+
+
+
+export default function Filters(props) {
+
+  console.log(props);
   
-  useEffect(() => {
-      const btn = document.getElementById("dropdownButton");
-      const menu = document.getElementById("dropdownMenu");
+  // useEffect(() => {
+  //     const btn = document.getElementById("dropdownButton");
+  //     const menu = document.getElementById("dropdownMenu");
 
-      if (!btn || !menu) return;
+  //     if (!btn || !menu) return;
 
-      const toggleMenu = (e) => {
-        e.stopPropagation();
-        menu.classList.toggle("opacity-0");
-        menu.classList.toggle("scale-95");
-        menu.classList.toggle("pointer-events-none");
-      };
+  //     const toggleMenu = (e) => {
+  //       e.stopPropagation();
+  //       menu.classList.toggle("opacity-0");
+  //       menu.classList.toggle("scale-95");
+  //       menu.classList.toggle("pointer-events-none");
+  //     };
 
-      const closeMenu = (e) => {
-        if (!menu.contains(e.target) && !btn.contains(e.target)) {
-          menu.classList.add("opacity-0", "scale-95", "pointer-events-none");
-        }
-      };
+  //     const closeMenu = (e) => {
+  //       if (!menu.contains(e.target) && !btn.contains(e.target)) {
+  //         menu.classList.add("opacity-0", "scale-95", "pointer-events-none");
+  //       }
+  //     };
 
-      const closeOnEscape = (e) => {
-        if (e.key === "Escape") {
-          menu.classList.add("opacity-0", "scale-95", "pointer-events-none");
-        }
-      };
+  //     const closeOnEscape = (e) => {
+  //       if (e.key === "Escape") {
+  //         menu.classList.add("opacity-0", "scale-95", "pointer-events-none");
+  //       }
+  //     };
 
-      btn.addEventListener("click", toggleMenu);
-      document.addEventListener("click", closeMenu);
-      document.addEventListener("keydown", closeOnEscape);
+  //     btn.addEventListener("click", toggleMenu);
+  //     document.addEventListener("click", closeMenu);
+  //     document.addEventListener("keydown", closeOnEscape);
 
-      return () => {
-        btn.removeEventListener("click", toggleMenu);
-        document.removeEventListener("click", closeMenu);
-        document.removeEventListener("keydown", closeOnEscape);
-      };
-    }, []);
+  //     return () => {
+  //       btn.removeEventListener("click", toggleMenu);
+  //       document.removeEventListener("click", closeMenu);
+  //       document.removeEventListener("keydown", closeOnEscape);
+  //     };
+  //   }, []);
 
   return (
 
     <>
-        <section className="w-full flex justify-between ">
+    <section className="w-full flex justify-between ">
       <div className="flex items-center">
         <p className="text-sm font-semibold">
           Leads Dashboard 
@@ -88,9 +106,22 @@ export default function Filters() {
         </div>
 
         <div className="h-auto w-auto">
-          
-          <AddLeadBtn />
 
+          <button id="add-lead-btn" className="bg-black text-sm text-gray-50 w-24 rounded-md h-full cursor-pointer  
+          
+          add-lead-btn 
+          
+          "
+          onClick={props.modal.open}
+          >
+          +  Add Lead 
+          </button>
+
+          <Modal  
+            modal = {props.modal}
+            leads = {props.leads}
+            setLeads = {props.setLeads}
+          />
 
         </div>
       </div>

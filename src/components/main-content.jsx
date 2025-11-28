@@ -1,14 +1,23 @@
 import { supabase } from "../supabaseClient";
-import { useState } from "react";
-import { useEffect } from "react";
-import Tittle from "./tittle";
+import { useState, useMemo, useEffect } from "react";
 import Table from "./data-table";
 import Filters from "./filters";
+import Modal from "./modal";
 
 
 export default function MainContent () {
 
   const [leads, setLeads] = useState([])
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const modal = useMemo(() => ({
+    isOpen: isModalOpen,
+    open: () => setIsModalOpen(true),
+    close: () => setIsModalOpen(false),
+  }), [isModalOpen]);
+
+
+
 
   async function fetchLeads() {
     const { data, error } = await supabase
@@ -27,6 +36,9 @@ export default function MainContent () {
   useEffect(()=>{
     fetchLeads()
   },[])
+  
+
+
 
   return (
     <>
@@ -34,7 +46,9 @@ export default function MainContent () {
     <Filters 
       leads = {leads}
       setLeads = {setLeads}
+      modal = {modal}
     />
+
     <Table 
       leads = {leads}
       setLeads = {setLeads}
