@@ -3,17 +3,7 @@ import Modal from "./modal";
 
 
 
-    ////// modal call btnnn
 
-      <button id="add-lead-btn" className="bg-black text-sm text-gray-50 w-24 rounded-md h-full cursor-pointer  
-      
-      add-lead-btn 
-      
-      ">
-      +  Add Lead 
-      </button>
-    
-    ///////
 
 
 
@@ -21,43 +11,9 @@ import Modal from "./modal";
 
 export default function Filters(props) {
 
-  console.log(props);
+
   
-  // useEffect(() => {
-  //     const btn = document.getElementById("dropdownButton");
-  //     const menu = document.getElementById("dropdownMenu");
 
-  //     if (!btn || !menu) return;
-
-  //     const toggleMenu = (e) => {
-  //       e.stopPropagation();
-  //       menu.classList.toggle("opacity-0");
-  //       menu.classList.toggle("scale-95");
-  //       menu.classList.toggle("pointer-events-none");
-  //     };
-
-  //     const closeMenu = (e) => {
-  //       if (!menu.contains(e.target) && !btn.contains(e.target)) {
-  //         menu.classList.add("opacity-0", "scale-95", "pointer-events-none");
-  //       }
-  //     };
-
-  //     const closeOnEscape = (e) => {
-  //       if (e.key === "Escape") {
-  //         menu.classList.add("opacity-0", "scale-95", "pointer-events-none");
-  //       }
-  //     };
-
-  //     btn.addEventListener("click", toggleMenu);
-  //     document.addEventListener("click", closeMenu);
-  //     document.addEventListener("keydown", closeOnEscape);
-
-  //     return () => {
-  //       btn.removeEventListener("click", toggleMenu);
-  //       document.removeEventListener("click", closeMenu);
-  //       document.removeEventListener("keydown", closeOnEscape);
-  //     };
-  //   }, []);
 
   return (
 
@@ -116,12 +72,6 @@ export default function Filters(props) {
           >
           +  Add Lead 
           </button>
-
-          <Modal  
-            modal = {props.modal}
-            leads = {props.leads}
-            setLeads = {props.setLeads}
-          />
 
         </div>
       </div>

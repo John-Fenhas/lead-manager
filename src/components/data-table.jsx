@@ -1,23 +1,19 @@
+import { useState } from "react"
 import TableRow from "./table-row"
 
 
 
-export default function Table(props) {
-  
 
-  let tableRowElms = props.leads.map((lead)=>(
-    <TableRow 
-      key = { lead.id }
-      id = {lead.id}
-      name = {lead.name}
-      number = {lead.number}
-      email = {lead.email}
-      budget = {lead.budget}
-      destination = {lead.destination}
-      date = {lead.date}
-      setLeads = {props.setLeads}
-    />
-  ))
+export default function Table(props) {
+  console.log(props)
+
+
+
+
+
+
+
+  
 
   return (
     <section className="mt-6 bg-white rounded-md w-full border border-gray-200">
@@ -38,9 +34,14 @@ export default function Table(props) {
 
           <tbody>
 
-          {tableRowElms.length > 0 ? (
-            tableRowElms
-          ) : (
+          {props.leads.length > 0 ?   props.leads.map((lead)=>(
+            <TableRow 
+              key = {lead.id}
+              lead = {lead}
+              onDelete = {props.onDelete}
+              onEdit = {props.onEdit}
+            />
+            )) : (
             <tr>
               <td
                 colSpan="7"
