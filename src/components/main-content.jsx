@@ -109,6 +109,7 @@ export default function MainContent () {
 
   setLeads(prev => [...prev, data]);
   }
+  
   async function editLead(id, updatedFields) {
     const { error } = await supabase
       .from("leads")
@@ -142,7 +143,10 @@ export default function MainContent () {
     isOpen: isModalOpen,
     open: () => setIsModalOpen(true),
     openEdit: openEditModal,
-    close: () => setIsModalOpen(false),
+    close: () => {
+      setIsModalOpen(false)
+      setSelectedLead(null)
+     } ,
   }), [isModalOpen]);
 
 
@@ -163,7 +167,6 @@ export default function MainContent () {
     <Modal  
       modal = {modal}
       addLead = {addLead}
-      lead = {selectedLead}
       onEditLead = {editLead}
       selectedLead = {selectedLead}
 

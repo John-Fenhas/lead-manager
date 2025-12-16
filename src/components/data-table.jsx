@@ -5,10 +5,7 @@ import TableRow from "./table-row"
 
 
 export default function Table(props) {
-  console.log(props)
-
-
-
+  
 
 
 
@@ -35,12 +32,14 @@ export default function Table(props) {
           <tbody>
 
           {props.leads.length > 0 ?   props.leads.map((lead)=>(
+
             <TableRow 
               key = {lead.id}
               lead = {lead}
               onDelete = {props.onDelete}
               onEdit = {props.onEdit}
             />
+
             )) : (
             <tr>
               <td

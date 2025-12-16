@@ -14,14 +14,27 @@ import { useEffect, useState } from "react"
     
     ///////
 
-
-
 export default function Modal(props) {
   console.log(props)
 
-  const isOpen = props.modal.isOpen
-  const close = props.modal.close
+  // modal close and open fns and keyboard event listener to close on esc click
+  
+  const isModalOpen = props.modal.isOpen
+  const closeModal = props.modal.close
 
+  useEffect(() => {
+  if (!isModalOpen) return;
+
+  const esc = (e) => e.key === "Escape" && closeModal();
+  window.addEventListener("keydown", esc);
+  return () => window.removeEventListener("keydown", esc);
+  }, [isModalOpen]);
+
+ 
+ 
+ 
+  // state for the modal form 
+ 
   const [formData, setFormData] = useState({
     name: "",
     number: "",
@@ -30,57 +43,49 @@ export default function Modal(props) {
     destination: "",
     date: ""
   });
+  
 
 
 
+  // modal data check for edit or add and propagating data acccordingly 
+ 
   useEffect(() => {
-    if (!props.lead) return;
-
-    setFormData({
-        name: props.lead.name || "",
-        number: props.lead.number || "",
-        email: props.lead.email || "",
-        budget: props.lead.budget || "",
-        destination: props.lead.destination || "",
-        date: props.lead.date || ""
+    if (props.selectedLead) {
+        setFormData({
+        name: props.selectedLead.name || "",
+        number: props.selectedLead.number || "",
+        email: props.selectedLead.email || "",
+        budget: props.selectedLead.budget || "",
+        destination: props.selectedLead.destination || "",
+        date: props.selectedLead.date || ""
       });
-  }, [props.lead]);
+      }else {
 
-  useEffect(() => {
-    if (props.lead) return;
-
-    setFormData({
-      name: "",
-      number: "",
-      email: "",
-      budget: "",
-      destination: "",
-      date: ""
-    });
-  }, [props.lead]);
-
-  useEffect(() => {
-  if (!isOpen) return;
-
-  const esc = (e) => e.key === "Escape" && close();
-  window.addEventListener("keydown", esc);
-  return () => window.removeEventListener("keydown", esc);
-  }, [isOpen]);
-
-  if (!isOpen) return null;
+      setFormData({
+        name: "",
+        number: "",
+        email: "",
+        budget: "",
+        destination: "",
+        date: ""
+      });
+    }
+  }, [props.selectedLead]);
 
 
+  // on form submit fn
+  
   const submitForm = async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (props.lead) {
-      await props.onEditLead(props.lead.id, formData);
+    if (props.selectedLead) {
+      await props.onEditLead(props.selectedLead.id, formData);
     } else {      
       await props.addLead(formData);
     }
 
-    close();
+    closeModal();
   };
 
 
@@ -89,17 +94,17 @@ export default function Modal(props) {
   return (
 
 
-
+    isModalOpen && (
     <div
       className="fixed inset-0 bg-black/30 flex items-center justify-center z-50"
-      onClick={close}
+      onClick={closeModal}
     >
       <div
         className="bg-white w-full max-w-lg rounded-md p-6 relative"
         onClick={e => e.stopPropagation()}
       >
         <button
-          onClick={close}
+          onClick={closeModal}
           className="absolute top-3 right-3 text-xl cursor-pointer"
         >
           ×
@@ -196,6 +201,6 @@ export default function Modal(props) {
           </form>
       </div>
     </div>
-
+    )
   )
 }

@@ -1,110 +1,69 @@
 import { useEffect, useState } from "react"
+import { supabase } from "../supabaseClient"
+import SignIn from "./sign-in"
+import SignUp from "./sign-up"
 
 
+
+
+  // async function handleSignUp(snapShot) {
+
+  //   const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+  //     email: snapShot.email,
+  //     password: snapShot.password,
+  //   })
+  //   if (signUpError) {
+  //     console.error("update error:", signUpError);
+  //     return;
+  //   }
+  //   console.log(signUpData)
+
+
+  //   // const { data: userRes } = await supabase.auth.getUser();
+  //   // console.log("auth user:", userRes.user);
+
+  //   // const { data: profileData, error: profileError } = await supabase.from('profiles').insert({
+  //   //   id: signUpData.user.id,
+  //   //   first_name: snapShot.firstName,
+  //   //   last_name: snapShot.lastName,
+  //   //   company_name: snapShot.companyName,
+  //   // })
+  //   // if (profileError) {
+  //   //   console.error("update error:", profileError);
+  //   //   return;
+  //   // }
+  //   // console.log(profileData)
+
+  // }
 
 
 
 export default function Auth() {
+  const [newUser, setNewUser] = useState(false)
 
-  const [signUpForm, setSignUpForm] = useState(false)
+  // sign up / sign in switch btn fn
 
-  function signUpBtnClick() {
-
-    setSignUpForm((prev)=> !prev)
+  function switchUserStates() {
+    setNewUser(!newUser)
   }
 
 
-
-  
-
-
-
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+  <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="w-full max-w-md bg-white rounded-lg shadow p-8">
 
-      <div className="w-full max-w-md bg-white rounded-lg shadow p-8">
+      { newUser ? 
+      <SignUp 
+      switchUserStates = {switchUserStates}
+      /> : 
+      <SignIn 
+      switchUserStates = {switchUserStates}
 
-        <h1 id="authTitle" className="text-2xl font-semibold text-center mb-6">
+      /> }
 
-            {signUpForm ? "Create Account" : "Sign In"}
-
-        </h1>
-
-        <form id="authForm" className="space-y-4">
-
-          {signUpForm ? <div id="signupFields" className="space-y-4">
-
-            <div className="grid grid-cols-2 gap-3">
-              <input
-                type="text"
-                placeholder="First name"
-                className="border rounded px-3 py-2"
-              />
-              <input
-                type="text"
-                placeholder="Last name"
-                className="border rounded px-3 py-2"
-              />
-            </div>
-
-            <input
-              type="text"
-              placeholder="Company"
-              className="w-full border rounded px-3 py-2"
-            />
-          </div>    :     null  }
-
-
-          <div>
-            <label className="block text-sm mb-1">Email</label>
-            <input
-              type="email"
-              placeholder="email@example.com"
-              className="w-full border rounded px-3 py-2 outline-none focus:ring-2 focus:ring-black"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm mb-1">Password</label>
-            <input
-              type="password"
-              placeholder="••••••••"
-              className="w-full border rounded px-3 py-2 outline-none focus:ring-2 focus:ring-black"
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-black text-white py-2 rounded hover:opacity-90"
-          >
-            Continue
-          </button>
-        </form>
-
-        <div className="text-center mt-6 text-sm">
-
-          <span id="toggleText">
-            {signUpForm ? "Already have an account?" : "Don’t have an account"}
-
-          </span>
-
-          <button
-            id="toggleBtn"
-            type="button"
-            className="font-medium underline ml-1"
-            onClick={signUpBtnClick}
-          >
-            
-            {signUpForm ? "Sign in" : "Sign up"}
-
-          </button>
-        </div>
-
-      </div>
     </div>
+  </div>
+
 
   )
 }
