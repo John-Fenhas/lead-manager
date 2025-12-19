@@ -5,35 +5,32 @@ import MainContent from "./components/main-content";
 import { supabase } from "./supabaseClient";
 import CheckEmail from "./components/check-your-email";
 import HomePage from "./components/home-page";
+import Footer from "./components/footer";
+import { createBrowserRouter } from "react-router-dom";
 
-export default function App (params) {
-  const [userLoggedIn, setUserLoggedIn] = useState(false)
-  const [session, setSession] = useState(null)
-  
-  useEffect(()=>{
-    async function fetchSession(params) {
-      const currentSission = await supabase.auth.getSession();
-      console.log(currentSission)
-      setSession(currentSission.data.session)
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <HomePage />,
+    },
+    {
+      path: '/sign-in',
+      element: <Auth />
     }
-    fetchSession();
-  })
-  
+  ])
+export default function App (params) {
 
   
-  function logInUser(params) {
-    setUserLoggedIn(true)
-  }
-  function logOutUser(params) {
-    setUserLoggedIn(false)
-  }
+  
+
+
 
 
   return (
     <>
-
-    <HomePage />
-
+    <Header />
+    <MainContent />
+    {/* <HomePage /> */}
     {/* {
     userLoggedIn 
       ?

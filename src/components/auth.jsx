@@ -45,11 +45,12 @@ export default function Auth() {
 
   function switchUserStates() {
     setNewUser(!newUser)
-  }
+  } 
+   
 
 
   return (
-  <div className="min-h-screen flex items-center justify-center bg-gray-100">
+  <div className="min-h-screen flex items-center justify-center bg-slate-50">
     <div className="w-full max-w-md bg-white rounded-lg shadow p-8">
 
       { newUser ? 

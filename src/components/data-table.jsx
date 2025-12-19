@@ -13,50 +13,63 @@ export default function Table(props) {
   
 
   return (
-    <section className="mt-6 bg-white rounded-md w-full border border-gray-200">
+<section className="mt-6 w-full bg-white rounded-xl border border-slate-200 shadow-sm">
 
-      <div>
-        <table className="w-full text-xs text-left border-collapse">
-          <thead className="">
-            <tr>
-              <th className="px-3 py-3">Name</th>
-              <th className="px-3 py-3">Number</th>
-              <th className="px-3 py-3">Email</th>
-              <th className="px-3 py-3">Budget</th>
-              <th className="px-3 py-3">Destination</th>
-              <th className="px-3 py-3">Date</th>
-              <th className="px-3 py-3">Actions</th>
-            </tr>
-          </thead>
+  {/* Table Header */}
+  <div className="px-4 py-3 border-b border-slate-200">
+    <p className="text-sm font-semibold text-slate-900">
+      Leads
+    </p>
+    <p className="text-xs text-slate-500">
+      Manage and track all incoming leads
+    </p>
+  </div>
 
-          <tbody>
+  <div className="overflow-x-auto">
+    <table className="w-full text-xs text-left border-collapse">
 
-          {props.leads.length > 0 ?   props.leads.map((lead)=>(
+      <thead className="bg-slate-50 text-slate-600">
+        <tr>
+          <th className="px-4 py-3 font-medium">Name</th>
+          <th className="px-4 py-3 font-medium">Number</th>
+          <th className="px-4 py-3 font-medium">Email</th>
+          <th className="px-4 py-3 font-medium">Budget</th>
+          <th className="px-4 py-3 font-medium">Destination</th>
+          <th className="px-4 py-3 font-medium">Date</th>
+          <th className="px-4 py-3 font-medium">Actions</th>
+        </tr>
+      </thead>
 
-            <TableRow 
-              key = {lead.id}
-              lead = {lead}
-              onDelete = {props.onDelete}
-              onEdit = {props.onEdit}
+      <tbody className="divide-y divide-slate-200">
+        {props.leads.length > 0 ? (
+          props.leads.map((lead) => (
+            <TableRow
+              key={lead.id}
+              lead={lead}
+              onDelete={props.onDelete}
+              onEdit={props.onEdit}
             />
+          ))
+        ) : (
+          <tr>
+            <td colSpan="7" className="py-12 text-center">
+              <p className="text-sm font-medium text-slate-700">
+                No leads yet
+              </p>
+              <p className="text-xs text-slate-500 mt-1">
+                Add your first lead to get started.
+              </p>
+            </td>
+          </tr>
+        )}
+      </tbody>
 
-            )) : (
-            <tr>
-              <td
-                colSpan="7"
-                className="text-center py-6 text-gray-500"
-              >
-                No leads yet — add your first one!
-              </td>
-            </tr>
-          )}
+    </table>
+  </div>
 
-          </tbody>
-        </table>
-      </div>
+</section>
 
 
-    </section>
   )
 
 }

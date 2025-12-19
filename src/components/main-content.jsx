@@ -3,6 +3,7 @@ import { useState, useMemo, useEffect } from "react";
 import Table from "./data-table";
 import Filters from "./filters";
 import Modal from "./modal";
+import Auth from "./auth";
 
 
 
@@ -158,9 +159,8 @@ export default function MainContent () {
 
   return (
     <>
-
+    
     <Filters 
-      
       modal = {modal}
     />
     
@@ -177,6 +177,8 @@ export default function MainContent () {
       onDelete = {deleteLead}
       onEdit = {openEditModal}
     />
+    
+  
     </>
   )
 
