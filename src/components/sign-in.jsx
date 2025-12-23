@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../supabaseClient"
+import { Link } from "react-router-dom"
+
+
 
 export default function SignIn(props) {
  
@@ -64,13 +67,16 @@ export default function SignIn(props) {
 
     <div className="text-center mt-6 text-sm text-slate-600">
       Don’t have an account?
-      <button
-        type="button"
-        className="font-medium underline ml-1 cursor-pointer text-indigo-600 hover:text-indigo-700"
-        onClick={props.switchUserStates}
-      >
-        Sign up
-      </button>
+
+      <Link to="/auth/signup">
+        <button
+          type="button"
+          className="font-medium underline ml-1 cursor-pointer text-indigo-600 hover:text-indigo-700"
+        >
+          Sign up
+        </button>
+      </Link>
+
     </div>
   </>
 

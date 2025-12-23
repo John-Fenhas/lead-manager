@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { supabase } from "../supabaseClient"
 import SignIn from "./sign-in"
 import SignUp from "./sign-up"
+import { useParams, useSearchParams } from "react-router-dom"
+import Header from "./header"
 
 
 
@@ -38,33 +40,35 @@ import SignUp from "./sign-up"
 
 
 
-export default function Auth() {
-  const [newUser, setNewUser] = useState(false)
-
+export default function Auth({mode}) {
+  // const [newUser, setNewUser] = useState(false)
+  let newUser = mode === "signup";
+  
   // sign up / sign in switch btn fn
 
-  function switchUserStates() {
-    setNewUser(!newUser)
-  } 
+  // function switchUserStates() {
+  //   setNewUser(!newUser)
+  // } 
    
 
 
   return (
-  <div className="min-h-screen flex items-center justify-center bg-slate-50">
-    <div className="w-full max-w-md bg-white rounded-lg shadow p-8">
+    <>
+      <Header />
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="w-full max-w-md bg-white rounded-lg shadow p-8">
 
-      { newUser ? 
-      <SignUp 
-      switchUserStates = {switchUserStates}
-      /> : 
-      <SignIn 
-      switchUserStates = {switchUserStates}
+          { newUser ? 
 
-      /> }
+          <SignUp 
+          /> : 
+          <SignIn 
 
-    </div>
-  </div>
+          /> }
 
+        </div>
+      </div>
+    </>
 
   )
 }

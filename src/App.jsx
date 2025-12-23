@@ -6,7 +6,11 @@ import { supabase } from "./supabaseClient";
 import CheckEmail from "./components/check-your-email";
 import HomePage from "./components/home-page";
 import Footer from "./components/footer";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import CompleteProfile from "./components/complete-profile";
+
+
+
 
   const router = createBrowserRouter([
     {
@@ -14,8 +18,16 @@ import { createBrowserRouter } from "react-router-dom";
       element: <HomePage />,
     },
     {
-      path: '/sign-in',
-      element: <Auth />
+      path: '/auth/login',
+      element: <Auth mode="login" />
+    },
+    {
+      path: '/auth/signup',
+      element: <Auth mode="signup" />
+    },
+    {
+      path: '/setup/profile',
+      element: <CompleteProfile />
     }
   ])
 export default function App (params) {
@@ -27,29 +39,7 @@ export default function App (params) {
 
 
   return (
-    <>
-    <Header />
-    <MainContent />
-    {/* <HomePage /> */}
-    {/* {
-    userLoggedIn 
-      ?
-      <>
-        <Header />
-        <MainContent />
-      </>
-      :
-      <Auth 
-      userLoggedIn = {userLoggedIn}
-      logInUser = {logInUser}
-      logOutUser = {logOutUser}
 
-      />
-    } */}
-
-
-    </>
-
-
+    <RouterProvider router={router} />
   )
 }

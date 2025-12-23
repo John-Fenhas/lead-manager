@@ -1,3 +1,8 @@
+import { Link } from "react-router-dom";
+
+
+
+
 export default function HeroSection({ onSignUp, onSignIn }) {
   return (
     <section className="min-h-[calc(100vh-4rem)] flex items-center">
@@ -22,19 +27,24 @@ export default function HeroSection({ onSignUp, onSignIn }) {
           </p>
 
           <div className="flex gap-4">
-            <button
-              onClick={onSignUp}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-md font-semibold transition"
-            >
-              Start Free
-            </button>
+            <Link to="/auth/signup">
+              <button
+                onClick={onSignUp}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-md font-semibold transition cursor-pointer"
+                >
+                Start Free
+              </button>
+            </Link>
 
-            <button
-              onClick={onSignIn}
-              className="px-8 py-4 rounded-md border border-slate-300 hover:border-slate-400 transition"
-            >
-              Sign In
-            </button>
+            <Link to="/auth/login">
+              <button
+                onClick={onSignIn}
+                className="px-8 py-4 rounded-md border border-slate-300 hover:border-slate-400 transition cursor-pointer"
+                >
+                Sign In
+              </button>
+            </Link>
+          
           </div>
         </div>
 

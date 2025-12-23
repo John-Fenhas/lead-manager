@@ -4,12 +4,11 @@
 
 export default function CheckEmail() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-md px-8 py-10 text-center">
+    <div className="flex items-center justify-center bg-white">
+      <div className="w-full max-w-md bg-white px-8 py-10 text-center">
         
-        {/* Icon */}
         <div className="flex justify-center mb-4">
-          <div className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100">
+          <div className="h-10 w-10 flex items-center justify-center rounded-full bg-slate-50">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -27,17 +26,14 @@ export default function CheckEmail() {
           </div>
         </div>
 
-        {/* Title */}
         <h1 className="text-xl font-semibold text-gray-900 mb-2">
           Check your email
         </h1>
 
-        {/* Description */}
         <p className="text-sm text-gray-600 mb-6">
-          We’ve sent a password reset link to your email
+          We’ve sent a confirmation link to your email
         </p>
 
-        {/* Footer note */}
         <p className="text-xs text-gray-500">
           Did you receive the email? If not, check your spam folder.
         </p>
