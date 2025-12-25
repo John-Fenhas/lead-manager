@@ -40,15 +40,19 @@ export default function SignUp(props) {
 
     const snapShot = getSnapshotFromState();
 
+    console.log(snapShot)
+
     const { data, error } = await supabase.auth.signUp({
       email: snapShot.email,
       password: snapShot.password,
+      options: {
+        emailRedirectTo: 'http://localhost:5173/setup/profile'
+      },
       
     });
 
     if (error) {
-      console.error("signup error:", error);
-      setErrorMsg(error.message);
+      console.error("signup error:", error.message);
       return;
     }
 

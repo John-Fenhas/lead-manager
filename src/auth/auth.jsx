@@ -3,7 +3,7 @@ import { supabase } from "../supabaseClient"
 import SignIn from "./sign-in"
 import SignUp from "./sign-up"
 import { useParams, useSearchParams } from "react-router-dom"
-import Header from "./header"
+import Header from "../components/header"
 
 
 

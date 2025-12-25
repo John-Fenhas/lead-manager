@@ -2,8 +2,9 @@ import { supabase } from "../supabaseClient";
 import { useState, useMemo, useEffect } from "react";
 import Table from "./data-table";
 import Filters from "./filters";
-import Modal from "./modal";
-import Auth from "./auth";
+import Modal from "../components/modal";
+import Auth from "../auth/auth";
+
 
 
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function CompleteProfile({ onSubmit }) {
+export default function CompleteProfile() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -14,7 +14,6 @@ export default function CompleteProfile({ onSubmit }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSubmit?.(formData);
   }
 
   return (
