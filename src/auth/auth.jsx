@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../supabaseClient"
-import SignIn from "./sign-in"
-import SignUp from "./sign-up"
-import { useParams, useSearchParams } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import Header from "../components/header"
+import Footer from "../components/footer"
 
 
 
@@ -40,34 +39,23 @@ import Header from "../components/header"
 
 
 
-export default function Auth({mode}) {
-  // const [newUser, setNewUser] = useState(false)
-  let newUser = mode === "signup";
+export default function Auth() {
   
-  // sign up / sign in switch btn fn
+const navigate = useNavigate();
 
-  // function switchUserStates() {
-  //   setNewUser(!newUser)
-  // } 
+  function onSignUpSuccess() {
+    navigate("/auth/check-your-email");
+  }
+  
+
    
 
 
   return (
     <>
-      <Header />
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="w-full max-w-md bg-white rounded-lg shadow p-8">
-
-          { newUser ? 
-
-          <SignUp 
-          /> : 
-          <SignIn 
-
-          /> }
-
-        </div>
-      </div>
+      <Outlet context={{
+        onSignUpSuccess,
+      }} />
     </>
 
   )

@@ -15,7 +15,6 @@ import { useEffect, useState } from "react"
     ///////
 
 export default function Modal(props) {
-  console.log(props)
 
   // modal close and open fns and keyboard event listener to close on esc click
   

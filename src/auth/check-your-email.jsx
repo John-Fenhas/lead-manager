@@ -4,8 +4,8 @@
 
 export default function CheckEmail() {
   return (
-    <div className="flex items-center justify-center bg-white">
-      <div className="w-full max-w-md bg-white px-8 py-10 text-center">
+    <div className="flex items-center min-h-9/12 justify-center bg-slate-50">
+      <div className="w-full max-w-md bg-white rounded-lg shadow px-8 py-10 text-center">
         
         <div className="flex justify-center mb-4">
           <div className="h-10 w-10 flex items-center justify-center rounded-full bg-slate-50">

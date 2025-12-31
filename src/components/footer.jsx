@@ -11,7 +11,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="text-lg font-bold tracking-tight mb-3">
-              Deal<span className="text-indigo-600">Zone</span>
+              Lead<span className="text-indigo-600">Zone</span>
             </div>
             <p className="text-sm text-slate-600 max-w-xs">
               A modern CRM built for real estate professionals to manage leads,
@@ -44,7 +44,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} Deal Zone. All rights reserved.
+            © {new Date().getFullYear()} LeadZone. All rights reserved.
           </p>
 
           <p className="text-xs text-slate-500">

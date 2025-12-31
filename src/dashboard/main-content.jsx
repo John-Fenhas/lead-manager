@@ -1,6 +1,6 @@
 import { supabase } from "../supabaseClient";
 import { useState, useMemo, useEffect } from "react";
-import Table from "./data-table";
+import Table from "./table";
 import Filters from "./filters";
 import Modal from "../components/modal";
 import Auth from "../auth/auth";
@@ -19,7 +19,6 @@ export default function MainContent () {
       .from("leads")
       .select("*")
       .order("id", { ascending: true });
-    console.log(data)
     if (error) {
       console.log("fetch error:", error);
       return;
@@ -161,24 +160,24 @@ export default function MainContent () {
   return (
     <>
     
-    <Filters 
-      modal = {modal}
-    />
-    
-    <Modal  
-      modal = {modal}
-      addLead = {addLead}
-      onEditLead = {editLead}
-      selectedLead = {selectedLead}
+      <Filters 
+        modal = {modal}
+      />
+      
+      <Modal  
+        modal = {modal}
+        addLead = {addLead}
+        onEditLead = {editLead}
+        selectedLead = {selectedLead}
 
-    />
+      />
 
-    <Table 
-      leads = {leads}
-      onDelete = {deleteLead}
-      onEdit = {openEditModal}
-    />
-    
+      <Table 
+        leads = {leads}
+        onDelete = {deleteLead}
+        onEdit = {openEditModal}
+      />
+      
   
     </>
   )

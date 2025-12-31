@@ -3,7 +3,6 @@ import { supabase } from "../supabaseClient";
 
 export default function TableRow(props) {
 
-  console.log(props)
 
 
   
