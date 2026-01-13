@@ -8,7 +8,7 @@ export default function HeroSection({ onSignUp, onSignIn }) {
     <section className="min-h-[calc(100vh-4rem)] flex items-center">
       <div className="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center">
 
-        {/* Left */}
+        
         <div>
           <p className="text-indigo-600 text-sm font-semibold mb-4 uppercase tracking-wide">
             Real Estate Lead CRM
@@ -48,7 +48,7 @@ export default function HeroSection({ onSignUp, onSignIn }) {
           </div>
         </div>
 
-        {/* Right – Preview */}
+        
         <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-6">
           <div className="flex justify-between mb-4 text-sm text-slate-600">
             <span>New Leads</span>

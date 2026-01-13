@@ -83,7 +83,14 @@ export default function Modal(props) {
     } else {      
       await props.addLead(formData);
     }
-
+    setFormData({
+        name: "",
+        number: "",
+        email: "",
+        budget: "",
+        destination: "",
+        date: ""
+      });
     closeModal();
   };
 

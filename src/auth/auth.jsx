@@ -47,6 +47,9 @@ const navigate = useNavigate();
     navigate("/auth/check-your-email");
   }
   
+  function onProfileComplete() {  
+    navigate("/dashboard");
+  }
 
    
 
@@ -55,8 +58,9 @@ const navigate = useNavigate();
     <>
       <Outlet context={{
         onSignUpSuccess,
+        onProfileComplete,
       }} />
-    </>
+    </> 
 
   )
 }

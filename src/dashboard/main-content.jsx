@@ -51,41 +51,8 @@ export default function MainContent () {
   }
 
 
-  async function addLead(newLead) {
-    const { data, error } = await supabase
-      .from("leads")
-      .insert(newLead)
-      .select()
-      .single();
 
-    if (error) {
-      console.log("insert error:", error);
-      return;
-   }
 
-    setLeads(prev => [...prev, data]);
-  }
-
-  
-  async function editLead(id, updatedFields) {
-    const { error } = await supabase
-      .from("leads")
-      .update(updatedFields)
-      .eq("id", id);
-
-    if (error) {
-      console.error("update error:", error);
-      return;
-    }
-
-    setLeads(prev =>
-      prev.map(lead =>
-        lead.id === id
-          ? { ...lead, ...updatedFields }
-          : lead
-      )
-    );
-  }
 
 
 

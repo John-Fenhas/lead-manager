@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { supabase } from "../supabaseClient";
+import { useAuth } from "../context/AuthProvider"
+import { useOutletContext } from "react-router-dom";
+
 
 export default function CompleteProfile() {
   const [formData, setFormData] = useState({
@@ -7,13 +11,31 @@ export default function CompleteProfile() {
     company: "",
   });
 
+  const {session, user, loading} = useAuth()
+  
+
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    
   }
 
-  function handleSubmit(e) {
+  const { onProfileComplete } = useOutletContext();
+
+  async function handleSubmit(e) {
     e.preventDefault();
+    const { data, error } = await supabase
+    .from('profiles')
+    .update({ 
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      company: formData.company
+    }).eq('id',user.id);
+
+
+    onProfileComplete()
+
+
   }
 
   return (
