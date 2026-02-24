@@ -3,6 +3,8 @@ import Footer from "../components/footer"
 import Header from "../components/header"
 import { useAuth } from "../context/AuthProvider"
 import Loader from "../components/loader"
+import AppHeader from "../components/AppHeader"
+import AppShell from "../app/AppShell"
 
 
 
@@ -24,11 +26,10 @@ export default function ProtectedLayout() {
    }
 
   return (
-    <>
-      <Header />
-      <Outlet />
-      <Footer />
-    </>
-
+    <AppShell>
+      <AppHeader/>
+      <Outlet/>
+      <Footer/>
+    </AppShell>
   )
 }

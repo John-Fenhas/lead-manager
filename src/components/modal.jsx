@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react"
+import StatusSelect from "./modal-statusSelect";
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/dark.css";
+import DestinationSelect from "./modal-destination";
 
 
 
@@ -30,43 +34,73 @@ export default function Modal(props) {
   }, [isModalOpen]);
 
  
+
+  // dashboard in the background of modal scroll freeze and unfreeze
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isModalOpen]);
  
  
   // state for the modal form 
  
   const [formData, setFormData] = useState({
+    status: "Fresh",
     name: "",
     number: "",
     email: "",
     budget: "",
     destination: "",
-    date: ""
+    date: null,
+    callRecap: "",
   });
   
 
 
-
   // modal data check for edit or add and propagating data acccordingly 
+  
+  useEffect(()=>{
+    console.log(formData)
+  },[formData])
+  console.log(props)
+
+   
+  
  
   useEffect(() => {
+    
     if (props.selectedLead) {
         setFormData({
+        status: props.selectedLead.status || "Fresh",
         name: props.selectedLead.name || "",
         number: props.selectedLead.number || "",
         email: props.selectedLead.email || "",
         budget: props.selectedLead.budget || "",
         destination: props.selectedLead.destination || "",
-        date: props.selectedLead.date || ""
+        date: props.selectedLead.date || null,
+        callRecap: props.selectedLead.callRecap || "",
+
       });
       }else {
 
       setFormData({
+        status: "Fresh",
         name: "",
         number: "",
         email: "",
         budget: "",
         destination: "",
-        date: ""
+        date: null, 
+        callRecap: "",
+
       });
     }
   }, [props.selectedLead]);
@@ -84,129 +118,227 @@ export default function Modal(props) {
       await props.addLead(formData);
     }
     setFormData({
+        status: "Fresh",
         name: "",
         number: "",
         email: "",
         budget: "",
         destination: "",
-        date: ""
+        date: null,
+        callRecap: "",
       });
     closeModal();
   };
 
 
-  
+
+  // On Change Function for the status select dropDown Comp.
+
+  function statusSelectOnChange(value) {
+    setFormData({ ...formData, status: value })
+  }
+
+  // on change function for the destination Select dropdowwn comp.
+
+  function destinationSelectOnChange(value) {
+    setFormData({...formData, destination: value})
+  }
 
   return (
 
 
     isModalOpen && (
-    <div
-      className="fixed inset-0 bg-black/30 flex items-center justify-center z-50"
+<div
+  className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center z-50 px-4"
+  onClick={closeModal}
+>
+  <div
+    className="bg-slate-950 w-full max-w-lg rounded-2xl p-6 relative border border-white/10 shadow-2xl"
+    onClick={(e) => e.stopPropagation()}
+  >
+    <button
       onClick={closeModal}
+      className="absolute top-3 right-3 text-xl text-slate-300 hover:text-white transition cursor-pointer"
     >
-      <div
-        className="bg-white w-full max-w-lg rounded-md p-6 relative"
-        onClick={e => e.stopPropagation()}
-      >
-        <button
-          onClick={closeModal}
-          className="absolute top-3 right-3 text-xl cursor-pointer"
-        >
-          ×
-        </button>
+      ×
+    </button>
 
-          <h2 className="text-xl font-semibold mb-4">Add New Lead</h2>
+    <h2 className="text-xl font-semibold mb-4 text-white">
+      Add New Lead
+    </h2>
 
-          <form id="leadForm" onSubmit={submitForm} className="space-y-4
-          
-          leadForm
-          ">
+    <form
+      id="leadForm"
+      onSubmit={submitForm}
+      className="space-y-4 leadForm"
+    >
+      
+      <div className="relative">
+        <label className="block mb-1 font-medium text-slate-300">Status</label>
 
-            <div>
-              
-              <label className="block mb-1 font-medium">Name</label>
-              
-              <input 
-                type="text" 
-                value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
-                className="w-full border rounded-md p-2" 
-                placeholder="Enter full name" 
-              
-              />
+        {/* <input
+          type="drop"
+          value={formData.status}
+          onChange={(e) =>
+            setFormData({ ...formData, status: e.target.value })
+          }
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none 
+          focus:border-indigo-400/50 focus:shadow-[0_0_0_3px_rgba(99,102,241,0.18)] transition"
+        /> */}
+        <StatusSelect 
+          value={props.selectedLead?.status || formData.status}
+          onChange={statusSelectOnChange}
 
-            </div>
+        />
 
-            <div>
-              <label className="block mb-1 font-medium">Number</label>
-
-              <input 
-                type="text" 
-                value={formData.number}
-                onChange={(e) => setFormData({...formData, number: e.target.value})}
-                className="w-full border rounded-md p-2" 
-                placeholder="Enter phone number"
-             
-              />
-            </div>
-
-            <div>
-              <label className="block mb-1 font-medium">Email</label>
-
-              <input 
-                type="email" 
-                value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
-                className="w-full border rounded-md p-2" placeholder="email@example.com" 
-                
-              />
-            </div>
-
-            <div>
-              <label className="block mb-1 font-medium">Budget</label>
-              <input 
-                type="text" 
-                value={formData.budget}
-                onChange={(e) => setFormData({...formData, budget: e.target.value})}
-                className="w-full border rounded-md p-2" 
-                placeholder="$10,000" 
-              
-              />
-                
-            </div>
-
-            <div>
-              <label className="block mb-1 font-medium">Destination</label>
-              <input 
-                type="text" 
-                value={formData.destination}
-                onChange={(e) => setFormData({...formData, destination: e.target.value})}
-                className="w-full border rounded-md p-2" placeholder="Enter destination" 
-                
-              />
-            </div>
-
-            <div>
-              <label className="block mb-1 font-medium">Date</label>
-              <input 
-                type="date" 
-                value={formData.date}
-                onChange={(e) => setFormData({...formData, date: e.target.value})}
-                className="w-full border rounded-md p-2" 
-                
-              />
-            </div>
-
-            <button type="submit"
-              
-              className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 cursor-pointer">
-              Save Lead
-            </button>
-
-          </form>
       </div>
-    </div>
+
+      <div>
+        <label className="block mb-1 font-medium text-slate-300">Name</label>
+
+        <input
+          type="text"
+          value={formData.name}
+          onChange={(e) =>
+            setFormData({ ...formData, name: e.target.value })
+          }
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none 
+          focus:border-indigo-400/50 focus:shadow-[0_0_0_3px_rgba(99,102,241,0.18)] transition"
+          placeholder="Enter full name"
+        />
+      </div>
+
+      <div>
+        <label className="block mb-1 font-medium text-slate-300">Number</label>
+
+        <input
+          type="text"
+          value={formData.number}
+          onChange={(e) =>
+            setFormData({ ...formData, number: e.target.value })
+          }
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none 
+          focus:border-indigo-400/50 focus:shadow-[0_0_0_3px_rgba(99,102,241,0.18)] transition"
+          placeholder="Enter phone number"
+        />
+      </div>
+
+      <div>
+        <label className="block mb-1 font-medium text-slate-300">Email</label>
+
+        <input
+          type="text"
+          value={formData.email}
+          onChange={(e) =>
+            setFormData({ ...formData, email: e.target.value })
+          }
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none 
+          focus:border-indigo-400/50 focus:shadow-[0_0_0_3px_rgba(99,102,241,0.18)] transition"
+          placeholder="email@example.com"
+        />
+      </div>
+
+      <div>
+        <label className="block mb-1 font-medium text-slate-300">Budget</label>
+
+        <input
+          type="text"
+          value={formData.budget}
+          onChange={(e) =>
+            setFormData({ ...formData, budget: e.target.value })
+          }
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none 
+          focus:border-indigo-400/50 focus:shadow-[0_0_0_3px_rgba(99,102,241,0.18)] transition"
+          placeholder="$10,000"
+        />
+      </div>
+
+      <div>
+        <label className="block mb-1 font-medium text-slate-300">
+          Destination
+        </label>
+
+        <DestinationSelect 
+          value={props.selectedLead?.destination || formData.destination}        onChange={destinationSelectOnChange}
+
+        />
+        
+        
+        {/* <input
+          type="text"
+          value={formData.destination}
+          onChange={(e) =>
+            setFormData({ ...formData, destination: e.target.value })
+          }
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none 
+          focus:border-indigo-400/50 focus:shadow-[0_0_0_3px_rgba(99,102,241,0.18)] transition"
+          placeholder="Enter destination"
+        />
+         */}
+      </div>
+
+      <div>
+        <label className="block mb-1 font-medium text-slate-300">
+          Call Recap
+        </label>
+
+        <input
+          type="text"
+          value={formData.callRecap}
+          onChange={(e) =>
+            setFormData({ ...formData, callRecap: e.target.value })
+          }
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none 
+          focus:border-indigo-400/50 focus:shadow-[0_0_0_3px_rgba(99,102,241,0.18)] transition"
+          placeholder="Enter Call Recap"
+        />
+      </div>
+
+      <div>
+        <label className="block mb-1 font-medium text-slate-300">Date</label>
+
+          <Flatpickr
+            value={formData.date}
+            options={{
+              enableTime: true,
+              minDate: "today",
+              dateFormat: "Y-m-d H:i",
+            }}
+            onChange={([date]) =>
+              setFormData(prev => ({
+                ...prev,
+                date: date,
+              }))}
+              className="
+              w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none 
+            focus:border-indigo-400/50 focus:shadow-[0_0_0_3px_rgba(99,102,241,0.18) transition"
+            placeholder="Select date & time"
+            autoComplete="off"
+
+          />
+
+
+        {/* <input
+          type="datetime-local"
+          value={formData.date}
+          onChange={(e) =>
+            setFormData({ ...formData, date: e.target.value })
+          }
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-400/50 
+          focus:shadow-[0_0_0_3px_rgba(99,102,241,0.18)] transition"
+        /> */}
+      </div>
+
+      <button
+        type="submit"
+        className="w-full bg-indigo-600 text-white py-3 rounded-xl hover:bg-indigo-500 transition shadow-[0_10px_30px_rgba(79,70,229,0.35)] cursor-pointer font-semibold"
+      >
+        Save Lead
+      </button>
+    </form>
+  </div>
+</div>
+
     )
   )
 }

@@ -3,8 +3,8 @@ import Header from "../components/header";
 import MainContent from "../dashboard/main-content.jsx";
 import { supabase } from "../supabaseClient";
 import CheckEmail from "../auth/check-your-email";
-import HomePage from "../pages/Home";
-import Footer from "../components/footer";
+import HomePage from "../pages/HomePage.jsx";
+
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import CompleteProfile from "../auth/complete-profile";
 import Auth from "../auth/auth.jsx";

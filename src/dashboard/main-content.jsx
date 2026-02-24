@@ -52,12 +52,7 @@ export default function MainContent () {
 
 
 
-
-
-
-
-
-  //lead form modal state and fns
+  //Add/Edit lead form modal state and fns
 
   const [selectedLead, setSelectedLead] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -99,12 +94,10 @@ export default function MainContent () {
   }
 
 
-
   function openEditModal(lead) {
   setSelectedLead(lead); 
   setIsModalOpen(true);
   }
-
 
 
   const modal = useMemo(() => ({
@@ -119,34 +112,100 @@ export default function MainContent () {
 
 
 
+  //Dashboard sort, filter and search states and functions 
+
+  const [search, setSearch] = useState({
+    value: ""
+  });
+  const [sortBy, setSortBy] = useState("date");
+  const [sortDir, setSortDir] = useState("desc")
+
+  const filteredLeads = useMemo(()=>{
+    let result = [...leads]
+
+    if (search){
+      result = result.filter(l =>
+        l.name.toLowerCase().includes(search.value.toLowerCase()) || l.callRecap.toLowerCase().includes(search.value.toLocaleLowerCase()) || l.email.toLowerCase().includes(search.value.toLocaleLowerCase())
+      );    
+    }
+
+    if (sortBy === "budget") {
+      sortDir === "asc" ?
+      result.sort((a, b) => a.budget - b.budget)
+      :
+      result.sort((a, b) => b.budget - a.budget);
+    }
+    
+    if (sortBy === "name") {
+      sortDir === "asc" ?
+      result.sort((a, b)=> a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
+      :
+      result.sort((a, b)=> b.name.toLowerCase().localeCompare(a.name.toLowerCase()))
+    }
+
+    if (sortBy === "date") {
+      sortDir === "asc" ? 
+      result.sort((a,b) => new Date(a.date)- new Date(b.date))
+      :
+      result.sort((a,b) => new Date(b.date)- new Date(a.date))
+
+    }
+
+    return result;
+
+  }, [leads, search,sortBy,sortDir])
+  
+  
+  function handleSearch(searchInput) {
+    setSearch({value: searchInput})    
+  };
+  
+  function handleSort(col) {
+    if (sortBy === col) {
+      setSortDir(prev => (prev === "asc" ? "desc" : "asc"));
+    } else {
+      setSortBy(col);
+      setSortDir("asc");
+    }
+    console.log('sorted')
+  }
+
+
 
   
 
 
 
   return (
-    <>
     
+    <section className="relative min-h-screen flex flex-col items-center px-10 pt-22"> 
+      
       <Filters 
         modal = {modal}
-      />
+        search={search.value}
+        handleSearch={handleSearch}
+        />
+
+      <Table 
+        leads = {filteredLeads}
+        onDelete = {deleteLead}
+        onEdit = {openEditModal}
+        sortBy= {sortBy}
+        sortDir= {sortDir}
+        handleSort = {handleSort}
+        />
       
+
+
       <Modal  
         modal = {modal}
         addLead = {addLead}
         onEditLead = {editLead}
         selectedLead = {selectedLead}
-
-      />
-
-      <Table 
-        leads = {leads}
-        onDelete = {deleteLead}
-        onEdit = {openEditModal}
-      />
-      
-  
-    </>
+        
+        />
+    
+    </section>
   )
 
 

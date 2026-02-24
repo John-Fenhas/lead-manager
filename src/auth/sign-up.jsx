@@ -64,20 +64,19 @@ export default function SignUp() {
  
  
   return (
+<>
+  {emailSent ? (
+    <CheckEmail />
+  ) : (
     <>
-    {emailSent ?
-        <CheckEmail />
-      :
-      <>
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="w-full max-w-md bg-white rounded-lg shadow p-8">
-          <h1 className="text-2xl font-semibold text-center mb-6 text-slate-900">
+      <div className="flex items-center justify-center bg-slate-950">
+        <div className="w-full max-w-md bg-white/5 border border-white/10 backdrop-blur-xl rounded shadow-[0_20px_60px_rgba(0,0,0,0.55)] p-8">
+          <h1 className="text-2xl font-semibold text-center mb-6 text-white">
             Create Account
           </h1>
 
           <form onSubmit={submitBtn} className="space-y-4">
             <div className="space-y-4">
-
               {/* <div className="grid grid-cols-2 gap-3">
                 <input
                   type="text"
@@ -110,96 +109,102 @@ export default function SignUp() {
               /> */}
 
               <div>
-                <label className="block text-sm mb-1 text-slate-700">Email</label>
+                <label className="block text-sm mb-1 text-slate-200">Email</label>
                 <input
                   type="email"
                   placeholder="email@example.com"
-                  className="w-full border border-slate-300 rounded px-3 py-2 bg-white text-slate-900 placeholder:text-slate-400 outline-none focus:ring-1 focus:ring-indigo-600"
+                  className="w-full border border-white/10 rounded-xl px-3 py-2 bg-white/5 text-white placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500/60"
                   value={signUpFormData.email}
                   onChange={(e) =>
-                    setSignUpFormData({ ...signUpFormData, email: e.target.value })
+                    setSignUpFormData({
+                      ...signUpFormData,
+                      email: e.target.value,
+                    })
                   }
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm mb-1 text-slate-700">Password</label>
+                <label className="block text-sm mb-1 text-slate-200">
+                  Password
+                </label>
                 <input
                   type="password"
                   placeholder="••••••••"
-
-                  className={`w-full border rounded px-3 py-2 bg-white text-slate-900 placeholder:text-slate-400 outline-none focus:ring-1
+                  className={`w-full border rounded-xl px-3 py-2 bg-white/5 text-white placeholder:text-slate-400 outline-none focus:ring-2
                     ${
                       !passwordsMatch && signUpFormData.confirmPassword
-                        ? "border-red-500 focus:ring-red-500"
-                        : "border-slate-300 focus:ring-indigo-600"
+                        ? "border-red-500/60 focus:ring-red-500/30"
+                        : "border-white/10 focus:ring-indigo-500/30 focus:border-indigo-500/60"
                     }
                   `}
-
                   value={signUpFormData.password}
                   onChange={(e) =>
-                    setSignUpFormData({ ...signUpFormData, password: e.target.value })
+                    setSignUpFormData({
+                      ...signUpFormData,
+                      password: e.target.value,
+                    })
                   }
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm mb-1 text-slate-700">Confirm Password</label>
+                <label className="block text-sm mb-1 text-slate-200">
+                  Confirm Password
+                </label>
                 <input
                   type="password"
                   placeholder="••••••••"
-
-                  className={`w-full border rounded px-3 py-2 bg-white text-slate-900 placeholder:text-slate-400 outline-none focus:ring-1
+                  className={`w-full border rounded-xl px-3 py-2 bg-white/5 text-white placeholder:text-slate-400 outline-none focus:ring-2
                     ${
                       !passwordsMatch && signUpFormData.confirmPassword
-                        ? "border-red-500 focus:ring-red-500"
-                        : "border-slate-300 focus:ring-indigo-600"
+                        ? "border-red-500/60 focus:ring-red-500/30"
+                        : "border-white/10 focus:ring-indigo-500/30 focus:border-indigo-500/60"
                     }
                   `}
-
                   value={signUpFormData.confirmPassword}
                   onChange={(e) =>
-                    setSignUpFormData({ ...signUpFormData, confirmPassword: e.target.value })
+                    setSignUpFormData({
+                      ...signUpFormData,
+                      confirmPassword: e.target.value,
+                    })
                   }
                   required
                 />
+
                 {!passwordsMatch && signUpFormData.confirmPassword && (
-                  <p className="text-sm text-red-500">
-                    Passwords do not match
-                  </p>
+                  <p className="text-sm text-red-400">Passwords do not match</p>
                 )}
               </div>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition"
+              className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-xl transition cursor-pointer shadow-[0_10px_30px_rgba(79,70,229,0.35)] font-semibold"
             >
               Sign Up
             </button>
           </form>
 
-          <div className="text-center mt-6 text-sm text-slate-600">
+          <div className="text-center mt-6 text-sm text-slate-300">
             Already have an account?
-            
             <Link to="/auth/login">
               <button
                 type="button"
-                className="font-medium underline ml-1 cursor-pointer text-indigo-600 hover:text-indigo-700"
+                className="font-medium underline ml-1 cursor-pointer text-indigo-400 hover:text-indigo-300"
               >
                 Sign in
               </button>
             </Link>
-
           </div>
         </div>
       </div>
-
-      </>
-    }
     </>
+  )}
+</>
+
 
 
   )

@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.84.0",
+    "flatpickr": "^4.6.13",
     "ldrs": "^1.1.9",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-flatpickr": "^4.0.11",
     "react-router-dom": "^7.10.1"
   },
   "devDependencies": {

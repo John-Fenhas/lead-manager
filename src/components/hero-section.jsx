@@ -2,36 +2,37 @@ import { Link } from "react-router-dom";
 
 
 
-
 export default function HeroSection({ onSignUp, onSignIn }) {
   return (
-    <section className="min-h-[calc(100vh-4rem)] flex items-center">
-      <div className="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center">
+    <section className="relative min-h-screen flex items-center pt-16">
 
-        
+
+      <div className="relative w-5/6 mx-auto px-8 lg:px-12 grid lg:grid-cols-2 gap-14 items-center">
         <div>
-          <p className="text-indigo-600 text-sm font-semibold mb-4 uppercase tracking-wide">
+          <p className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide uppercase text-slate-300 bg-white/5 border border-white/10 px-4 py-2 rounded-full mb-6">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.6)]" />
             Real Estate Lead CRM
           </p>
 
-          <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight mb-6 text-slate-900">
+          <h1 className="text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-tight mb-6 text-white">
             Turn Property <br />
             Leads Into <br />
-            Closed Deals
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 to-cyan-300">
+              Closed Deals
+            </span>
           </h1>
 
-          <p className="text-slate-600 max-w-xl mb-10 text-lg">
-            Lead Zone helps real estate agents capture, organize, and follow
-            up with leads faster — without spreadsheets or missed
-            opportunities.
+          <p className="text-slate-300 max-w-xl mb-10 text-lg leading-relaxed">
+            Lead Zone helps real estate agents capture, organize, and follow up with
+            leads faster — without spreadsheets or missed opportunities.
           </p>
 
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <Link to="/auth/signup">
               <button
                 onClick={onSignUp}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-md font-semibold transition cursor-pointer"
-                >
+                className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-xl font-semibold transition shadow-[0_10px_30px_rgba(79,70,229,0.35)] cursor-pointer"
+              >
                 Start Free
               </button>
             </Link>
@@ -39,29 +40,51 @@ export default function HeroSection({ onSignUp, onSignIn }) {
             <Link to="/auth/login">
               <button
                 onClick={onSignIn}
-                className="px-8 py-4 rounded-md border border-slate-300 hover:border-slate-400 transition cursor-pointer"
-                >
+                className="w-full sm:w-auto px-8 py-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-slate-200 font-semibold transition cursor-pointer"
+              >
                 Sign In
               </button>
             </Link>
-          
+          </div>
+
+          <div className="mt-10 flex flex-wrap gap-6 text-sm text-slate-400">
+            <div className="flex items-center gap-2">
+              <span className="text-slate-500">Setup:</span>
+              <span className="text-slate-200 font-medium">2 minutes</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-slate-500">Follow-ups:</span>
+              <span className="text-slate-200 font-medium">Faster</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-slate-500">Workflow:</span>
+              <span className="text-slate-200 font-medium">No spreadsheets</span>
+            </div>
           </div>
         </div>
 
-        
-        <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-6">
-          <div className="flex justify-between mb-4 text-sm text-slate-600">
-            <span>New Leads</span>
-            <span className="text-emerald-600 font-medium">+12 today</span>
-          </div>
+        <div className="relative">
+          <div className="absolute inset-0 rounded-3xl bg-linear-to-r from-indigo-500/10 to-cyan-500/10 blur-2xl" />
 
-          <div className="space-y-3">
-            <LeadRow name="John Smith" status="New" />
-            <LeadRow name="Sarah Ahmed" status="Follow-up" />
-            <LeadRow name="Michael Lee" status="Viewing Booked" />
+          <div className="relative bg-white/5 border border-white/10 rounded-3xl shadow-2xl backdrop-blur-xl p-6">
+            <div className="flex justify-between mb-5 text-sm text-slate-300">
+              <span className="font-medium">New Leads</span>
+              <span className="text-emerald-300 font-semibold bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">
+                +12 today
+              </span>
+            </div>
+
+            <div className="space-y-3">
+              <LeadRow name="John Smith" status="New" />
+              <LeadRow name="Sarah Ahmed" status="Follow-up" />
+              <LeadRow name="Michael Lee" status="Viewing Booked" />
+            </div>
+
+            <div className="mt-6 pt-5 border-t border-white/10 text-xs text-slate-400">
+              Assign leads • Add notes • Track status • Close deals ✅
+            </div>
           </div>
         </div>
-
       </div>
     </section>
   );
@@ -69,9 +92,9 @@ export default function HeroSection({ onSignUp, onSignIn }) {
 
 function LeadRow({ name, status }) {
   return (
-    <div className="flex justify-between items-center bg-slate-50 border border-slate-200 rounded-md px-4 py-2 text-sm">
-      <span className="font-medium">{name}</span>
-      <span className="text-indigo-600">{status}</span>
+    <div className="flex justify-between items-center bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm">
+      <span className="font-semibold text-white">{name}</span>
+      <span className="text-indigo-300 font-medium">{status}</span>
     </div>
   );
 }

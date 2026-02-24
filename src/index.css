@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+
+
+.flatpickr-day.selected {
+  background: rgb(79,57,246) !important;
+  border: none;
+}
