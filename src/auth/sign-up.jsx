@@ -47,7 +47,7 @@ export default function SignUp() {
       email: snapShot.email,
       password: snapShot.password,
       options: {
-        emailRedirectTo: "https://lead-zone.vercel.app/auth/setup-profile"
+        emailRedirectTo: "https://lead-zone-johns-projects-6482f1ec.vercel.app/auth/setup-profile"
       },
       
     });
