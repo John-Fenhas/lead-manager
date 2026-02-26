@@ -47,7 +47,7 @@ export default function SignUp() {
       email: snapShot.email,
       password: snapShot.password,
       options: {
-        emailRedirectTo: 'http://localhost:5173/auth/setup-profile'
+        emailRedirectTo: 'https://lead-zone.vercel.app/auth/setup-profile'
       },
       
     });
