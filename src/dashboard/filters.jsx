@@ -1,7 +1,46 @@
-export default function Filters(props) {
+import FilterDropDown from "../components/filter-dropdown";
+
+export default function Filters({
+  modal,
+  search,
+  handleSearch,
+  filter,
+  handleFilter,
+}) {
+
+  
+  
+  const statusFilters = [
+    {label: "Status", value: null},
+    {label: "All", value: null},
+    { label: "Fresh", value: "Fresh"},
+    { label: "No Answer", value: "No Answer"},
+    { label: "Call Back", value: "Call Back"},
+    { label: "Follow-up", value: "Follow-up"},
+    { label: "Meeting Booked", value: "Meeting Booked"},
+    { label: "Site Visit", value: "Site Visit"},
+    { label: "Low Budget", value: "Low Budget"},
+    { label: "Not Interested", value: "Not Interested"}
+  ];
+
+  const destinationFilters = [
+    {label: "Destination", value: null},
+    {label: "All", value: null},
+    {label: "New Capital", value: "New Capital"},
+    {label: "New Cairo", value: "New Cairo"},
+    {label: "October", value: "October"},
+    {label: "North Coast", value: "North Coast"},
+    {label: "Red Sea", value: "Red Sea"},
+    {label: "Sokhna", value: "Sokhna"},
+    {label: "Mostakbal City", value: "Mostakbal City"},
+    {label: "Al Shorouk City", value: "Al Shorouk City"},
+    {label: "The 5th Settlement", value: "The 5th Settlement"},
+  ];
+
+
   return (
     
-    <div className="w-5/6">
+    <div className="w-5/6 z-50">
 
       <div className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 flex justify-between items-center shadow-2xl backdrop-blur-xl">
 
@@ -13,7 +52,7 @@ export default function Filters(props) {
           <button
             id="add-lead-btn"
             className="bg-indigo-600 text-xs text-white px-4 rounded-xl h-full hover:bg-indigo-500 transition shadow-[0_10px_30px_rgba(79,70,229,0.35)] add-lead-btn"
-            onClick={props.modal.open}
+            onClick={modal.open}
             >
             + Add Lead
           </button>
@@ -21,7 +60,7 @@ export default function Filters(props) {
       </div>
 
       
-      <div className="w-full mt-4 bg-white/5 border border-white/10 rounded-2xl px-4 h-14 flex justify-between items-center shadow-2xl backdrop-blur-xl">
+      <div className="w-full mt-4 bg-white/5 border border-white/10 rounded-2xl px-4 h-14 flex justify-between items-center shadow-2xl backdrop-blur-xl ">
         <div className="flex items-center gap-2">
           <svg
             width="16px"
@@ -39,7 +78,18 @@ export default function Filters(props) {
           </svg>
           <p className="text-xs font-medium text-slate-300">Filters</p>
 
+          <FilterDropDown 
+            filter={"status"}
+            listOfFilters={statusFilters}
+            onChange={handleFilter}
+          />
           
+          <FilterDropDown 
+            filter={"destination"}
+            listOfFilters={destinationFilters}
+            onChange={handleFilter}
+          />
+
 
         </div>
 
@@ -76,8 +126,8 @@ export default function Filters(props) {
               placeholder-slate-500
               focus:outline-none focus:ring-0
               "
-              value={props.search}
-              onChange={(e)=> props.handleSearch(e.target.value)}
+              value={search}
+              onChange={(e)=> handleSearch(e.target.value)}
               />
           </div>
 

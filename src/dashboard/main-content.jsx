@@ -119,7 +119,19 @@ export default function MainContent () {
   });
   const [sortBy, setSortBy] = useState("date");
   const [sortDir, setSortDir] = useState("desc")
+  const [filter, setFilter] = useState({
+    statusFilter: {
+      filterCol: "status",
+      filterBy: null
+    },
+    destinationFilter: {
+      filterCol: "destination",
+      filterBy: null
+    }
+  })
+  console.log(filter)
 
+  
   const filteredLeads = useMemo(()=>{
     let result = [...leads]
 
@@ -151,9 +163,24 @@ export default function MainContent () {
 
     }
 
+
+    
+    if (filter.statusFilter.filterBy) {
+      result = result.filter((lead) => lead[filter.statusFilter.filterCol] === filter.statusFilter.filterBy)
+
+    }
+
+    if (filter.destinationFilter.filterBy) {
+      result = result.filter((lead) => lead[filter.destinationFilter.filterCol] === filter.destinationFilter.filterBy)
+    }
+
+
+
+      
+
     return result;
 
-  }, [leads, search,sortBy,sortDir])
+  }, [leads, search,sortBy,sortDir, filter])
   
   
   function handleSearch(searchInput) {
@@ -170,7 +197,37 @@ export default function MainContent () {
     console.log('sorted')
   }
 
+  function handleFilter(col, filter) {
+    //col is the coloum to filter 
+    // filter is the item inside the coloum to filter 
 
+    if (col === "status") {
+      setFilter({
+        statusFilter: {
+          filterCol: "status",
+          filterBy: filter
+        },
+        destinationFilter: {
+          filterCol: "destination",
+          filterBy: null
+        }
+      })
+    }
+    if (col === "destination") {
+      setFilter({
+        statusFilter: {
+          filterCol: "status",
+          filterBy: null
+        },
+        destinationFilter: {
+          filterCol: "destination",
+          filterBy: filter
+        }
+      })
+      
+    }
+
+  }
 
   
 
@@ -184,6 +241,8 @@ export default function MainContent () {
         modal = {modal}
         search={search.value}
         handleSearch={handleSearch}
+        filter={filter}
+        handleFilter = {handleFilter}
         />
 
       <Table 

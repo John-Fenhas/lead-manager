@@ -66,11 +66,7 @@ export default function Modal(props) {
 
 
   // modal data check for edit or add and propagating data acccordingly 
-  
-  useEffect(()=>{
-    console.log(formData)
-  },[formData])
-  console.log(props)
+
 
    
   

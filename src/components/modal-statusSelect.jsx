@@ -55,7 +55,12 @@ export default function StatusSelect({
       </button>
 
       {open && (
-        <div className="absolute z-50 mt-1 w-full rounded-xl border border-white/10 bg-slate-950 shadow-xl overflow-hidden">
+        <div className="absolute z-50 mt-1 w-full rounded-xl border border-white/10 bg-slate-950 shadow-xl overflow-hidden max-h-56 overflow-y-auto"
+          style={{ 
+          scrollbarWidth: "thin",     
+          scrollbarColor: "rgba(255,255,255,0.2) transparent", 
+          }}
+        >
 
           {statuses.map(status => (
             <div
