@@ -59,7 +59,7 @@ export default function Modal(props) {
     email: "",
     budget: null,
     destination: "",
-    date: null,
+    date: new Date(),
     callRecap: "",
   });
   
@@ -81,7 +81,7 @@ export default function Modal(props) {
         email: props.selectedLead.email || "",
         budget: props.selectedLead.budget || null,
         destination: props.selectedLead.destination || "",
-        date: props.selectedLead.date || null,
+        date: props.selectedLead.date || new Date(),
         callRecap: props.selectedLead.callRecap || "",
 
       });
@@ -94,7 +94,7 @@ export default function Modal(props) {
         email: "",
         budget: null,
         destination: "",
-        date: null, 
+        date: new Date(), 
         callRecap: "",
 
       });
@@ -120,7 +120,7 @@ export default function Modal(props) {
         email: "",
         budget: null,
         destination: "",
-        date: null,
+        date: new Date(),
         callRecap: "",
       });
     closeModal();
