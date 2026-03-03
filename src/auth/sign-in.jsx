@@ -27,8 +27,7 @@ export default function SignIn() {
       return;
     }
 
-    console.log("Signed in user:", data.user);
-    console.log("Session:", data.session);
+
     onSignInSuccess();
   }
 

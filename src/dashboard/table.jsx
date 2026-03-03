@@ -100,13 +100,23 @@ export default function Table(props) {
               ))
             ) : (
               <tr>
-                <td colSpan="7" className="py-14 text-center">
+                <td colSpan="9" className="py-14 text-center">
                   <p className="text-sm font-medium text-slate-200">
                     No leads yet
                   </p>
                   <p className="text-xs text-slate-500 mt-1">
                     Add your first lead to get started.
                   </p>
+                  <div className="flex items-center justify-center mt-2.5 gap-3 h-9">          
+                    <button
+                      id="add-lead-btn"
+                      className="bg-indigo-600 text-xs text-white px-4 rounded-xl h-full hover:bg-indigo-500 transition shadow-[0_10px_30px_rgba(79,70,229,0.35)] add-lead-btn"
+                      onClick={props.modal.open}
+                      >
+                      + Add Lead
+                    </button>
+                  </div>
+                  
                 </td>
               </tr>
             )}

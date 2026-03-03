@@ -129,7 +129,6 @@ export default function MainContent () {
       filterBy: null
     }
   })
-  console.log(filter)
 
   
   const filteredLeads = useMemo(()=>{
@@ -246,6 +245,7 @@ export default function MainContent () {
         />
 
       <Table 
+        modal = {modal}   
         leads = {filteredLeads}
         onDelete = {deleteLead}
         onEdit = {openEditModal}
